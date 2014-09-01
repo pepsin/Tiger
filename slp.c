@@ -69,3 +69,45 @@ A_expList A_LastExpList(A_exp last) {
   e->u.last = last;
   return e;
 }
+
+int maxargs(A_stm stm, int count)
+{
+  if (stm->kind == A_compoundStm) {
+    int stm1_count = maxargs(stm->u.compound.stm1, count);
+    int stm2_count = maxargs(stm->u.compound.stm2, count);
+    if (stm1_count > stm2_count) {
+      if (stm1_count > count) {
+        return stm1_count;
+      }
+    } else {
+      if (stm2_count > count) {
+        return stm2_count;
+      }
+    }
+    return count;
+  } else if (stm->kind == A_printStm) {
+    int new_count = exp_list_count(stm->u.print.exps, 0);
+    if (new_count > count) {
+      return new_count;
+    }
+    return count;
+  } else if (stm->kind == A_assignStm){
+    if (stm->u.assign.exp->kind == A_eseqExp) {
+      A_stm s = stm->u.assign.exp->u.eseq.stm;
+      int stm_count = maxargs(s, count);
+      if (stm_count > count) {
+        return stm_count;
+      }
+      return count;
+    }
+  }
+}
+
+int exp_list_count(A_expList list, int count)
+{
+  if (list->kind == A_lastExpList) {
+    return count + 1;
+  } else {
+    return exp_list_count(list->u.pair.tail, count + 1);
+  }
+}
