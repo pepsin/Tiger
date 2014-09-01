@@ -1,6 +1,12 @@
 #include "util.h"
 #include "slp.h"
 
+void interpStm(A_stm stm);
+void interpExp(A_exp exp);
+void printList(A_expList list);
+void printExp(A_exp exp);
+
+
 A_stm A_CompoundStm(A_stm stm1, A_stm stm2) {
   A_stm s = checked_malloc(sizeof *s);
   s->kind = A_compoundStm;
@@ -101,6 +107,7 @@ int maxargs(A_stm stm, int count)
       return count;
     }
   }
+  return 0;
 }
 
 int exp_list_count(A_expList list, int count)
@@ -109,5 +116,50 @@ int exp_list_count(A_expList list, int count)
     return count + 1;
   } else {
     return exp_list_count(list->u.pair.tail, count + 1);
+  }
+}
+
+
+void interp(A_stm stm)
+{
+  interpStm(stm);
+}
+
+void interpStm(A_stm stm)
+{
+  if (stm->kind == A_compoundStm) {
+    interpStm(stm->u.compound.stm1);
+    interpStm(stm->u.compound.stm2);
+  } else if (stm->kind == A_assignStm){
+    
+  } else if (stm->kind == A_printStm) {
+    printList(stm->u.print.exps);
+  } 
+}
+
+void printList(A_expList list)
+{
+  if (list->kind == A_pairExpList) {
+    printExp(list->u.pair.head);
+    printList(list->u.pair.tail);
+  } else {
+    printExp(list->u.last);
+  }
+}
+
+void printExp(A_exp exp)
+{
+}
+
+void interpExp(A_exp exp)
+{
+  if (exp->kind == A_idExp) {
+    
+  } else if (exp->kind == A_numExp) {
+    
+  } else if (exp->kind == A_opExp){
+    
+  } else if (exp->kind == A_eseqExp){
+    
   }
 }

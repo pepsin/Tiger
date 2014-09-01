@@ -36,3 +36,5 @@ A_expList A_LastExpList(A_exp last);
 
 int maxargs (A_stm stm, int count);
 int exp_list_count(A_expList list, int count);
+
+void interp(A_stm stm);
