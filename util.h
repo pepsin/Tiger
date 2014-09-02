@@ -1,6 +1,7 @@
+#ifndef __UTIL_H
+#define __UTIL_H
 #include <assert.h>
 #include <stdio.h>
-
 typedef char *string;
 typedef char bool;
 
@@ -21,3 +22,6 @@ struct U_boolList_ {
 U_boolList U_BoolList(bool head, U_boolList tail);
 
 int max(int a, int b);
+void *last_can_null(void *a, void *b);
+
+#endif

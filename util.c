@@ -1,8 +1,6 @@
 /*
  * util.c - commonly used utility functions.
  */
-
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "util.h"
@@ -34,4 +32,13 @@ U_boolList U_BoolList(bool head, U_boolList tail)
 int max(int a, int b)
 {
   return (a > b) ? a : b;
+}
+
+void *last_can_null(void *a, void *b)
+{
+  if (a!=NULL) {
+    return a;
+  } else {
+    return b;
+  }
 }
