@@ -1,11 +1,9 @@
 #include <stdio.h>
-#include "util.h"
-#include "slp.h"
+#include "impl.h"
 #include "prog1.h"
 
 int main (int argc, char const *argv[])
 {
-  int x = maxargs(prog(), 0);
-  printf("%d", x);
+  interp(prog());
   return 0;
 }

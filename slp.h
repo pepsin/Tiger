@@ -33,8 +33,3 @@ struct A_expList_ {enum {A_pairExpList, A_lastExpList} kind;
 
 A_expList A_PairExpList(A_exp head, A_expList tail);
 A_expList A_LastExpList(A_exp last);
-
-int maxargs (A_stm stm, int count);
-int exp_list_count(A_expList list, int count);
-
-void interp(A_stm stm);

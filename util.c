@@ -30,3 +30,8 @@ U_boolList U_BoolList(bool head, U_boolList tail)
   list->tail = tail;
   return list;
 }
+
+int max(int a, int b)
+{
+  return (a > b) ? a : b;
+}
